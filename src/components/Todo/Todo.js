@@ -1,11 +1,11 @@
 import React from "react";
 
-function App() {
+const Todo = () => {
   return (
     <div>
-      <h1>start</h1>
+      <h1>ToDo</h1>
     </div>
   );
-}
+};
 
-export default App;
+export default Todo;
