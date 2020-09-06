@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import axios from "axios";
+import { connect } from "react-redux";
+import { getTodos } from "../../store/actions/todoActions";
+
 import AddTodo from "../AddTodo/AddTodo";
 import Todos from "../Todos/Todos";
 import "./App.css";
@@ -13,21 +15,8 @@ import Navbar from "../Navbar/Navbar";
 // ];
 
 class App extends Component {
-  state = {
-    todos: null,
-  };
-
-  deleteTodo = (e, id) => {
-    this.setState({ todos: this.state.todos.filter((todo) => todo.id !== id) });
-  };
-  addTodo = (todo) => {
-    this.setState({ todos: [todo, ...this.state.todos] });
-  };
-
   componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos")
-      .then((res) => this.setState({ todos: res.data }));
+    this.props.getTodos();
   }
   render() {
     // if (this.state.todos.length === 0) {
@@ -39,10 +28,10 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route path="/addTodos">
-            <AddTodo addTodo={this.addTodo} />
+            <AddTodo />
           </Route>
           <Route exach path="/">
-            <Todos todos={this.state.todos} deleteTodo={this.deleteTodo} />
+            <Todos todos={this.props.todos} />
           </Route>
         </Switch>
       </div>
@@ -50,4 +39,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todoReducer.todos,
+  };
+};
+
+export default connect(mapStateToProps, { getTodos })(App);

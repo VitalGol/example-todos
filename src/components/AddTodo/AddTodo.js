@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import { addTodo } from "../../store/actions/todoActions";
 class AddTodo extends Component {
   state = {
     title: "",
@@ -38,4 +39,4 @@ class AddTodo extends Component {
   }
 }
 
-export default AddTodo;
+export default connect(null, { addTodo })(AddTodo);
