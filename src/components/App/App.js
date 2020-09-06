@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Todo from "../Todo/Todo";
+import AddTodo from "../AddTodo/AddTodo";
+import "./App.css";
 
 // const data = [
 //   { id: 1, title: "to read" },
@@ -27,6 +29,7 @@ class App extends Component {
       // console.log('-- ',todos);
       <div className="container">
         <h1>To-Do LIST</h1>
+        <AddTodo />
         {this.state.todos.map((todo) => {
           return (
             <Todo
