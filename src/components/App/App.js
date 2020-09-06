@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Todo from "../Todo/Todo";
+import { Switch, Route } from "react-router-dom";
 import AddTodo from "../AddTodo/AddTodo";
+import Todos from "../Todos/Todos";
 import "./App.css";
 
 // const data = [
@@ -26,20 +27,16 @@ class App extends Component {
     }
 
     return (
-      // console.log('-- ',todos);
       <div className="container">
         <h1>To-Do LIST</h1>
-        <AddTodo />
-        {this.state.todos.map((todo) => {
-          return (
-            <Todo
-              key={todo.id}
-              id={todo.id}
-              title={todo.title}
-              deleteTodo={this.deleteTodo}
-            />
-          );
-        })}
+        <Switch>
+          <Route path="/addTodos">
+            <AddTodo />
+          </Route>
+          <Route exach path="/">
+            <Todos todos={this.state.todos} />
+          </Route>
+        </Switch>
       </div>
     );
   }
